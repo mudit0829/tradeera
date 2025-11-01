@@ -71,8 +71,6 @@
     .btn-primary { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #fff; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4); }
 
-    .mobile-menu { display: none; }
-
     /* HERO SECTION */
     .hero {
       min-height: 100vh;
@@ -239,6 +237,82 @@
     .stat-number { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #2563eb, #1e40af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
     .stat-label { color: #64748b; font-weight: 600; }
 
+    /* USE CASES SECTION */
+    .use-cases-section {
+      padding: 100px 3rem;
+      background: linear-gradient(135deg, #f9f5ff 0%, #f0f9ff 100%);
+    }
+
+    .use-cases-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .use-case-card {
+      background: #ffffff;
+      border: 1px solid #e0e7ff;
+      border-radius: 18px;
+      padding: 3rem;
+      animation: slideUp 0.8s ease-out;
+      animation-fill-mode: both;
+      transition: all 0.3s;
+    }
+
+    .use-case-card:nth-child(1) { animation-delay: 0.1s; }
+    .use-case-card:nth-child(2) { animation-delay: 0.2s; }
+    .use-case-card:nth-child(3) { animation-delay: 0.3s; }
+    .use-case-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .use-case-card:hover {
+      transform: translateY(-10px);
+      border-color: #2563eb;
+      box-shadow: 0 25px 50px rgba(37, 99, 235, 0.12);
+    }
+
+    .use-case-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+
+    .use-case-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 1rem;
+    }
+
+    .use-case-description {
+      color: #64748b;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .use-case-roi {
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid #2563eb;
+    }
+
+    .use-case-roi-label {
+      font-size: 0.85rem;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .use-case-roi-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     /* HOW IT WORKS */
     .how-it-works {
       padding: 100px 3rem;
@@ -289,48 +363,6 @@
 
     .step-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a; }
     .step-card p { color: #64748b; font-size: 0.95rem; }
-
-    /* PRICING */
-    .pricing-section {
-      padding: 100px 3rem;
-      background: #ffffff;
-    }
-
-    .pricing-wrapper {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2.5rem;
-      margin-top: 4rem;
-    }
-
-    .pricing-card {
-      padding: 2.5rem;
-      border: 1px solid #e0e7ff;
-      border-radius: 16px;
-      text-align: center;
-      transition: all 0.3s;
-      animation: slideUp 0.8s ease-out;
-      animation-fill-mode: both;
-      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
-    }
-
-    .pricing-card:nth-child(1) { animation-delay: 0.1s; }
-    .pricing-card:nth-child(2) { animation-delay: 0.2s; transform: scale(1.05); border-color: #2563eb; background: #ffffff; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1); }
-
-    .pricing-card:hover:not(:nth-child(2)) { transform: translateY(-5px); }
-
-    .price-tier { font-size: 1.3rem; font-weight: 800; color: #2563eb; margin-bottom: 0.5rem; }
-    .price { font-size: 2.8rem; font-weight: 900; color: #0f172a; margin-bottom: 0.5rem; }
-    .price-period { color: #64748b; font-size: 0.95rem; margin-bottom: 2rem; }
-
-    .price-features { list-style: none; margin-bottom: 2rem; text-align: left; }
-    .price-features li { padding: 0.8rem 0; border-bottom: 1px solid #e2e8f0; color: #475569; font-size: 0.95rem; }
-    .price-features li::before { content: '✓'; margin-right: 0.8rem; color: #2563eb; font-weight: 900; }
 
     /* CTA FINAL */
     .cta-final {
@@ -418,7 +450,7 @@
     /* RESPONSIVE */
     @media (max-width: 1000px) {
       .features-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
-      .pricing-grid { grid-template-columns: 1fr; }
+      .use-cases-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-wrapper { grid-template-columns: 1fr; gap: 2rem; }
       .benefits-wrapper { grid-template-columns: 1fr; gap: 3rem; }
@@ -429,12 +461,11 @@
     @media (max-width: 600px) {
       header { padding: 1rem; }
       nav { display: none; }
-      .mobile-menu { display: block; }
       .hero { padding: 6rem 1rem 2rem; }
       .hero h1 { font-size: 2.2rem; }
       .features-grid, .testimonials-grid, .stats-wrapper { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr; }
+      .use-cases-grid { grid-template-columns: 1fr; }
       .section-intro h2 { font-size: 2rem; }
       .cta-final { margin: 2rem 1rem; }
     }
@@ -453,8 +484,8 @@
       </a>
       <nav>
         <a href="#features">Features</a>
+        <a href="#use-cases">Use Cases</a>
         <a href="#how">How It Works</a>
-        <a href="#pricing">Pricing</a>
         <a href="#testimonials">Reviews</a>
       </nav>
       <div class="nav-buttons">
@@ -562,6 +593,54 @@
     </div>
   </section>
 
+  <!-- USE CASES & ROI -->
+  <section class="use-cases-section" id="use-cases">
+    <div class="use-cases-wrapper">
+      <div class="section-intro">
+        <h2>Real Results, Real Impact</h2>
+        <p>See how traders across all experience levels leverage TRADEERA to maximize returns and minimize risk.</p>
+      </div>
+      <div class="use-cases-grid">
+        <div class="use-case-card">
+          <span class="use-case-icon">💼</span>
+          <h3 class="use-case-title">Day Traders</h3>
+          <div class="use-case-description">Execute multiple trades per day with millisecond precision. Our AI identifies intraday patterns and opportunities before competitors.</div>
+          <div class="use-case-roi">
+            <div class="use-case-roi-label">Average ROI Increase</div>
+            <div class="use-case-roi-value">+35%</div>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">📈</span>
+          <h3 class="use-case-title">Swing Traders</h3>
+          <div class="use-case-description">Hold positions for days or weeks while our algorithms identify breakout points and trend reversals in real-time.</div>
+          <div class="use-case-roi">
+            <div class="use-case-roi-label">Average ROI Increase</div>
+            <div class="use-case-roi-value">+42%</div>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🏦</span>
+          <h3 class="use-case-title">Institutional Investors</h3>
+          <div class="use-case-description">Enterprise-grade APIs and whitelabel solutions for hedge funds, asset managers, and financial institutions.</div>
+          <div class="use-case-roi">
+            <div class="use-case-roi-label">Cost Reduction</div>
+            <div class="use-case-roi-value">-45%</div>
+          </div>
+        </div>
+        <div class="use-case-card">
+          <span class="use-case-icon">🎯</span>
+          <h3 class="use-case-title">Portfolio Managers</h3>
+          <div class="use-case-description">Diversify across assets with AI-powered rebalancing and risk management. Optimize returns while minimizing exposure.</div>
+          <div class="use-case-roi">
+            <div class="use-case-roi-label">Risk Reduction</div>
+            <div class="use-case-roi-value">-38%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- HOW IT WORKS -->
   <section class="how-it-works" id="how">
     <div class="how-wrapper">
@@ -589,45 +668,6 @@
           <div class="step-number">4</div>
           <h3>Grow Wealth</h3>
           <p>Use AI insights to make smarter trades. Monitor performance in real-time.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="pricing-section" id="pricing">
-    <div class="pricing-wrapper">
-      <div class="section-intro">
-        <h2>Simple Pricing</h2>
-        <p>Transparent, no hidden fees. Choose the plan that fits your trading needs.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="price-tier">Starter</div>
-          <div class="price">Free</div>
-          <div class="price-period">Forever</div>
-          <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Get Started</a>
-          <ul class="price-features">
-            <li>Real-time market data</li>
-            <li>Basic charting</li>
-            <li>Email support</li>
-            <li>Mobile app</li>
-            <li>5 Watchlists</li>
-          </ul>
-        </div>
-        <div class="pricing-card">
-          <div class="price-tier">Professional</div>
-          <div class="price">$29</div>
-          <div class="price-period">per month</div>
-          <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Start Trial</a>
-          <ul class="price-features">
-            <li>Everything in Starter</li>
-            <li>Advanced analytics</li>
-            <li>AI predictions</li>
-            <li>Priority support</li>
-            <li>Unlimited watchlists</li>
-            <li>Custom indicators</li>
-          </ul>
         </div>
       </div>
     </div>
