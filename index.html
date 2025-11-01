@@ -3,26 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRADEERA - AI Trading Intelligence Platform</title>
+  <title>TRADEERA - Enterprise Trading Intelligence</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Nunito', sans-serif;
-      background: #fafbfc;
-      color: #0d1b2a;
+    body { 
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #1a2332;
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
     /* ANIMATIONS */
-    @keyframes slideInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
-    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-    @keyframes glow { 0%, 100% { box-shadow: 0 0 20px rgba(20, 160, 116, 0.4); } 50% { box-shadow: 0 0 40px rgba(20, 160, 116, 0.7); } }
-    @keyframes countUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-50px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(100px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    @keyframes floatIn { from { opacity: 0; transform: translateY(20px) rotateX(10deg); } to { opacity: 1; transform: translateY(0) rotateX(0); } }
 
     /* HEADER */
     header {
@@ -30,20 +31,20 @@
       width: 100%;
       top: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(30px);
-      border-bottom: 1px solid rgba(20, 160, 116, 0.08);
-      padding: 1.2rem 2rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(40px);
+      border-bottom: 1px solid rgba(26, 35, 50, 0.08);
+      padding: 1.5rem 3rem;
       transition: all 0.3s ease;
     }
 
     header.scrolled {
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      padding: 0.8rem 2rem;
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 8px 32px rgba(26, 35, 50, 0.08);
+      padding: 1rem 3rem;
     }
 
-    .header-content {
+    .header-wrapper {
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
@@ -51,131 +52,33 @@
       justify-content: space-between;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
+    .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; font-weight: 900; color: #2563eb; font-size: 1.4rem; letter-spacing: -0.5px; }
+    .logo-icon { width: 45px; height: 45px; background: linear-gradient(135deg, #2563eb, #1e40af); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
 
-    .logo:hover { transform: scale(1.05); }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #14a074 0%, #11a874 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(20, 160, 116, 0.25);
-    }
-
-    .logo-text {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: #14a074;
-      letter-spacing: -0.5px;
-    }
-
-    nav {
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #4a5568;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    nav a:hover {
-      color: #14a074;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #14a074, #11a874);
-      transition: width 0.3s;
-    }
-
+    nav { display: flex; gap: 3.5rem; }
+    nav a { text-decoration: none; color: #64748b; font-weight: 600; transition: all 0.3s; position: relative; }
+    nav a:hover { color: #2563eb; }
+    nav a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: #2563eb; transition: width 0.3s; }
     nav a:hover::after { width: 100%; }
 
-    .nav-buttons {
-      display: flex;
-      gap: 1rem;
-    }
+    .nav-buttons { display: flex; gap: 1rem; }
+    .btn { padding: 0.8rem 2rem; border: none; cursor: pointer; font-weight: 700; border-radius: 10px; transition: all 0.3s; text-decoration: none; display: inline-block; font-size: 0.95rem; position: relative; overflow: hidden; }
 
-    .btn {
-      padding: 0.75rem 1.8rem;
-      border-radius: 10px;
-      border: none;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 0.95rem;
-      text-decoration: none;
-      display: inline-block;
-      position: relative;
-      overflow: hidden;
-    }
+    .btn-outline { background: transparent; border: 1.5px solid #2563eb; color: #2563eb; }
+    .btn-outline:hover { background: #eff6ff; }
 
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.3s;
-    }
-
-    .btn:hover::before { left: 100%; }
-
-    .btn-outline {
-      background: transparent;
-      color: #14a074;
-      border: 2px solid #14a074;
-    }
-
-    .btn-outline:hover {
-      background: #f0fdf8;
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #14a074 0%, #0d7550 100%);
-      color: #fff;
-      box-shadow: 0 6px 20px rgba(20, 160, 116, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(20, 160, 116, 0.4);
-    }
+    .btn-primary { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #fff; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4); }
 
     .mobile-menu { display: none; }
 
     /* HERO SECTION */
     .hero {
-      padding: 8rem 2rem 4rem;
       min-height: 100vh;
+      padding: 120px 3rem 60px;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 50%, #f9f5ff 100%);
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f0fdf8 0%, #f7faff 50%, #fff8f0 100%);
       position: relative;
       overflow: hidden;
     }
@@ -183,29 +86,21 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: 10%;
-      right: 5%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(20, 160, 116, 0.1) 0%, transparent 70%);
+      top: -50%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
       border-radius: 50%;
-      animation: float 15s ease-in-out infinite;
+      animation: float 20s ease-in-out infinite;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: 10%;
-      left: 5%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(73, 214, 153, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float 20s ease-in-out infinite reverse;
-    }
+    @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, 50px); } }
 
-    .hero-container {
-      max-width: 1300px;
+    .hero-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
@@ -214,516 +109,331 @@
       z-index: 1;
     }
 
-    .hero-content {
-      animation: slideInUp 1s ease-out;
+    .hero-content { animation: fadeInUp 1s ease-out; }
+    .hero-badge { display: inline-block; padding: 0.75rem 1.5rem; background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.2); border-radius: 50px; color: #2563eb; font-weight: 700; font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .hero h1 { font-size: 4.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: #0f172a; }
+    .hero h1 span { background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .hero p { font-size: 1.3rem; color: #475569; margin-bottom: 2.5rem; line-height: 1.8; }
+
+    .hero-buttons { display: flex; gap: 1.5rem; margin-bottom: 3rem; }
+
+    .hero-image { position: relative; animation: fadeInRight 1s ease-out 0.3s both; }
+    .hero-image img { width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 30px 60px rgba(37, 99, 235, 0.15); transition: transform 0.3s; }
+    .hero-image img:hover { transform: scale(1.02) translateY(-10px); }
+
+    /* SECTION BLOCKS */
+    section { position: relative; }
+
+    .section-intro {
+      padding: 100px 3rem;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: rgba(20, 160, 116, 0.1);
-      border: 1px solid rgba(20, 160, 116, 0.2);
-      border-radius: 50px;
-      color: #14a074;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-    }
+    .section-intro h2 { font-size: 3.2rem; font-weight: 900; margin-bottom: 1.5rem; color: #0f172a; }
+    .section-intro p { font-size: 1.2rem; color: #64748b; max-width: 700px; margin: 0 auto; line-height: 1.8; }
 
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: #14a074;
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-      color: #0d1b2a;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, #14a074 0%, #11a874 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      color: #4a5568;
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .hero-features {
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-feature {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-weight: 600;
-      color: #4a5568;
-    }
-
-    .hero-feature::before {
-      content: '✓';
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      height: 24px;
-      background: linear-gradient(135deg, #14a074 0%, #11a874 100%);
-      color: #fff;
-      border-radius: 50%;
-      font-weight: 900;
-    }
-
-    .hero-image {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: slideInRight 1s ease-out 0.3s both;
-    }
-
-    .hero-image img {
-      width: 100%;
-      max-width: 480px;
-      border-radius: 20px;
-      box-shadow: 0 30px 60px rgba(20, 160, 116, 0.2);
-      transition: transform 0.3s;
-    }
-
-    .hero-image img:hover {
-      transform: scale(1.03) translateY(-10px);
-    }
-
-    /* TRUST SECTION */
-    .trust {
-      padding: 4rem 2rem;
-      background: #fff;
+    /* FEATURES BLOCK */
+    .features-block {
+      padding: 80px 3rem;
+      background: #ffffff;
       border-top: 1px solid #e2e8f0;
+    }
+
+    .features-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
+    }
+
+    .feature-item {
+      padding: 2.5rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+      border: 1px solid #e0e7ff;
+      border-radius: 16px;
+      transition: all 0.3s;
+      animation: slideUp 0.8s ease-out;
+      animation-fill-mode: both;
+    }
+
+    .feature-item:nth-child(1) { animation-delay: 0.1s; }
+    .feature-item:nth-child(2) { animation-delay: 0.2s; }
+    .feature-item:nth-child(3) { animation-delay: 0.3s; }
+
+    .feature-item:hover {
+      transform: translateY(-10px);
+      border-color: #2563eb;
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+    }
+
+    .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; display: block; }
+    .feature-item h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a; }
+    .feature-item p { color: #64748b; line-height: 1.7; }
+
+    /* BENEFITS SECTION */
+    .benefits-section {
+      padding: 100px 3rem;
+      background: linear-gradient(135deg, #f9f5ff 0%, #f0f9ff 100%);
+    }
+
+    .benefits-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .benefits-content { animation: fadeInLeft 1s ease-out; }
+    .benefits-image { animation: fadeInRight 1s ease-out; }
+
+    .benefits-image img { width: 100%; max-width: 450px; border-radius: 18px; box-shadow: 0 25px 50px rgba(37, 99, 235, 0.12); }
+
+    .benefits-list { margin-top: 2.5rem; }
+    .benefit-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; animation: slideUp 0.8s ease-out; }
+    .benefit-check { width: 28px; height: 28px; background: linear-gradient(135deg, #2563eb, #1e40af); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; flex-shrink: 0; }
+    .benefit-text { color: #475569; font-weight: 500; }
+
+    .benefits-content h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 1.5rem; color: #0f172a; }
+    .benefits-content p { font-size: 1.1rem; color: #64748b; margin-bottom: 2rem; line-height: 1.8; }
+
+    /* STATS SECTION */
+    .stats-section {
+      padding: 80px 3rem;
+      background: #ffffff;
       border-bottom: 1px solid #e2e8f0;
     }
 
-    .trust-content {
-      max-width: 1300px;
+    .stats-wrapper {
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
 
-    .trust-item {
+    .stat-card {
       text-align: center;
-      animation: countUp 0.6s ease-out;
-    }
-
-    .trust-num {
-      font-size: 2.8rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #14a074 0%, #11a874 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .trust-label {
-      color: #718096;
-      font-weight: 600;
-      margin-top: 0.5rem;
-    }
-
-    /* FEATURES SHOWCASE */
-    .features-showcase {
-      padding: 8rem 2rem;
-      background: linear-gradient(135deg, #f9fdfb 0%, #f0fdf8 100%);
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 4rem;
-      animation: slideInUp 0.8s ease-out;
-    }
-
-    .section-header h2 {
-      font-size: 3rem;
-      font-weight: 900;
-      margin-bottom: 1rem;
-      color: #0d1b2a;
-    }
-
-    .section-header p {
-      font-size: 1.1rem;
-      color: #718096;
-      line-height: 1.8;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
-      backdrop-filter: blur(10px);
       padding: 2.5rem;
-      border-radius: 18px;
-      border: 1px solid rgba(20, 160, 116, 0.1);
-      transition: all 0.3s;
-      cursor: pointer;
-      animation: slideInUp 0.8s ease-out;
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+      border-radius: 16px;
+      border: 1px solid #e0e7ff;
+      animation: scaleIn 0.8s ease-out;
+      animation-fill-mode: both;
     }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #14a074, #11a874);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
+    .stat-card:nth-child(1) { animation-delay: 0.1s; }
+    .stat-card:nth-child(2) { animation-delay: 0.2s; }
+    .stat-card:nth-child(3) { animation-delay: 0.3s; }
+    .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+    .stat-number { font-size: 3rem; font-weight: 900; background: linear-gradient(135deg, #2563eb, #1e40af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+    .stat-label { color: #64748b; font-weight: 600; }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 100px 3rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
     }
 
-    .feature-card:hover {
-      transform: translateY(-10px);
-      border-color: #14a074;
-      box-shadow: 0 20px 40px rgba(20, 160, 116, 0.15);
-    }
-
-    .feature-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      display: block;
-    }
-
-    .feature-card h3 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: #0d1b2a;
-    }
-
-    .feature-card p {
-      color: #718096;
-      line-height: 1.7;
-      font-size: 1rem;
-    }
-
-    /* COMPARISON SECTION */
-    .comparison {
-      padding: 8rem 2rem;
-      background: #fff;
-    }
-
-    .comparison-container {
-      max-width: 1300px;
+    .how-wrapper {
+      max-width: 1400px;
       margin: 0 auto;
     }
 
-    .comparison-grid {
+    .steps-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
-      margin-top: 3rem;
+      margin-top: 4rem;
     }
 
-    .comparison-card {
-      background: linear-gradient(135deg, #f9fdfb 0%, #f0fdf8 100%);
-      border: 2px solid #e2e8f0;
-      border-radius: 15px;
+    .step-card {
       padding: 2.5rem;
-      transition: all 0.3s;
+      background: #ffffff;
+      border: 1px solid #e0e7ff;
+      border-radius: 16px;
+      text-align: center;
+      animation: floatIn 0.8s ease-out;
+      animation-fill-mode: both;
       position: relative;
     }
 
-    .comparison-card.featured {
-      border-color: #14a074;
-      transform: scale(1.05);
-      box-shadow: 0 20px 50px rgba(20, 160, 116, 0.2);
-    }
+    .step-card:nth-child(1) { animation-delay: 0.1s; }
+    .step-card:nth-child(2) { animation-delay: 0.2s; }
+    .step-card:nth-child(3) { animation-delay: 0.3s; }
+    .step-card:nth-child(4) { animation-delay: 0.4s; }
 
-    .comparison-card.featured::before {
-      content: 'POPULAR';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #14a074 0%, #11a874 100%);
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-weight: 800;
-      font-size: 0.8rem;
-    }
-
-    .comparison-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 1.5rem;
-      color: #0d1b2a;
-    }
-
-    .comparison-price {
-      font-size: 2.5rem;
-      font-weight: 900;
-      color: #14a074;
-      margin-bottom: 0.5rem;
-    }
-
-    .comparison-period {
-      color: #718096;
-      margin-bottom: 2rem;
-      font-weight: 600;
-    }
-
-    .comparison-features {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
-
-    .comparison-features li {
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(20, 160, 116, 0.1);
-      color: #4a5568;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .comparison-features li::before {
-      content: '✓';
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #2563eb, #1e40af);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 18px;
-      height: 18px;
-      background: rgba(20, 160, 116, 0.1);
-      color: #14a074;
-      border-radius: 50%;
-      font-weight: 900;
-      font-size: 0.8rem;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      padding: 6rem 2rem;
-      background: linear-gradient(135deg, #14a074 0%, #0d7550 100%);
-      text-align: center;
       color: #fff;
-      border-radius: 20px;
-      margin: 5rem auto;
-      max-width: 900px;
-      box-shadow: 0 20px 60px rgba(20, 160, 116, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .cta-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-section h2 {
-      font-size: 2.8rem;
       font-weight: 900;
-      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      margin: 0 auto 1.5rem;
     }
 
-    .cta-section p {
-      font-size: 1.2rem;
-      margin-bottom: 2.5rem;
-      opacity: 0.95;
+    .step-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; color: #0f172a; }
+    .step-card p { color: #64748b; font-size: 0.95rem; }
+
+    /* PRICING */
+    .pricing-section {
+      padding: 100px 3rem;
+      background: #ffffff;
     }
 
-    .cta-section .btn {
-      background: #fff;
-      color: #14a074;
-      font-size: 1rem;
-      padding: 1rem 2.5rem;
+    .pricing-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .cta-section .btn:hover {
-      background: #f0fdf8;
-      transform: translateY(-3px);
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
     }
+
+    .pricing-card {
+      padding: 2.5rem;
+      border: 1px solid #e0e7ff;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s;
+      animation: slideUp 0.8s ease-out;
+      animation-fill-mode: both;
+      background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 100%);
+    }
+
+    .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+    .pricing-card:nth-child(2) { animation-delay: 0.2s; transform: scale(1.05); border-color: #2563eb; background: #ffffff; box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1); }
+    .pricing-card:nth-child(3) { animation-delay: 0.3s; }
+
+    .pricing-card:hover:not(:nth-child(2)) { transform: translateY(-5px); }
+
+    .price-tier { font-size: 1.3rem; font-weight: 800; color: #2563eb; margin-bottom: 0.5rem; }
+    .price { font-size: 2.8rem; font-weight: 900; color: #0f172a; margin-bottom: 0.5rem; }
+    .price-period { color: #64748b; font-size: 0.95rem; margin-bottom: 2rem; }
+
+    .price-features { list-style: none; margin-bottom: 2rem; text-align: left; }
+    .price-features li { padding: 0.8rem 0; border-bottom: 1px solid #e2e8f0; color: #475569; font-size: 0.95rem; }
+    .price-features li::before { content: '✓'; margin-right: 0.8rem; color: #2563eb; font-weight: 900; }
+
+    /* CTA FINAL */
+    .cta-final {
+      padding: 80px 3rem;
+      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+      text-align: center;
+      border-radius: 20px;
+      margin: 5rem 3rem;
+      color: #fff;
+      animation: slideUp 1s ease-out;
+    }
+
+    .cta-final h2 { font-size: 2.8rem; font-weight: 900; margin-bottom: 1rem; }
+    .cta-final p { font-size: 1.2rem; margin-bottom: 2.5rem; opacity: 0.95; }
+
+    .cta-final .btn { background: #fff; color: #2563eb; }
+    .cta-final .btn:hover { background: #f0f9ff; }
 
     /* TESTIMONIALS */
     .testimonials {
-      padding: 8rem 2rem;
-      background: linear-gradient(135deg, #f9fdfb 0%, #f0fdf8 100%);
+      padding: 100px 3rem;
+      background: linear-gradient(135deg, #f9f5ff 0%, #f0f9ff 100%);
+    }
+
+    .testimonials-wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      max-width: 1300px;
-      margin: 3rem auto 0;
+      margin-top: 4rem;
     }
 
     .testimonial-card {
-      background: #fff;
+      background: #ffffff;
       padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s;
+      border-radius: 16px;
+      border: 1px solid #e0e7ff;
+      animation: fadeInUp 0.8s ease-out;
+      animation-fill-mode: both;
     }
 
-    .testimonial-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(20, 160, 116, 0.1);
-    }
+    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+    .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+    .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
 
-    .testimonial-stars {
-      color: #fbbf24;
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    .testimonial-text {
-      color: #4a5568;
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-      font-style: italic;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .testimonial-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #14a074, #11a874);
-    }
-
-    .testimonial-info {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .testimonial-name {
-      font-weight: 700;
-      color: #0d1b2a;
-    }
-
-    .testimonial-role {
-      font-size: 0.85rem;
-      color: #718096;
-    }
+    .testimonial-stars { color: #fbbf24; margin-bottom: 1rem; }
+    .testimonial-text { color: #475569; margin-bottom: 1.5rem; font-style: italic; line-height: 1.8; }
+    .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+    .testimonial-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #1e40af); }
+    .testimonial-info { display: flex; flex-direction: column; }
+    .testimonial-name { font-weight: 700; color: #0f172a; }
+    .testimonial-role { font-size: 0.85rem; color: #64748b; }
 
     /* FOOTER */
     footer {
-      background: #0d3d2f;
-      color: #a0d5c2;
-      padding: 5rem 2rem 2rem;
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 5rem 3rem 2rem;
     }
 
-    .footer-content {
-      max-width: 1300px;
+    .footer-wrapper {
+      max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 3rem;
       margin-bottom: 3rem;
     }
 
-    .footer-col h3 {
-      color: #4ff7b5;
-      margin-bottom: 1rem;
-      font-weight: 800;
-      font-size: 1.1rem;
-    }
-
-    .footer-col a {
-      display: block;
-      color: #a0d5c2;
-      text-decoration: none;
-      margin-bottom: 0.7rem;
-      transition: color 0.3s;
-      font-size: 0.95rem;
-    }
-
-    .footer-col a:hover {
-      color: #4ff7b5;
-    }
+    .footer-col h3 { color: #f1f5f9; margin-bottom: 1.5rem; font-weight: 800; }
+    .footer-col a { display: block; color: #cbd5e1; text-decoration: none; margin-bottom: 1rem; transition: color 0.3s; }
+    .footer-col a:hover { color: #2563eb; }
 
     .footer-bottom {
       text-align: center;
       padding-top: 2rem;
-      border-top: 1px solid rgba(160, 213, 194, 0.2);
-      color: #7db3a5;
-      font-size: 0.95rem;
+      border-top: 1px solid rgba(203, 213, 225, 0.2);
+      color: #94a3b8;
     }
 
     /* RESPONSIVE */
     @media (max-width: 1000px) {
-      .mobile-menu { display: flex; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
-      .mobile-menu span { width: 24px; height: 2.5px; background: #14a074; border-radius: 2px; }
-      nav { display: none; }
-      .hero-container { grid-template-columns: 1fr; gap: 2rem; }
-      .hero h1 { font-size: 2.5rem; }
-      .trust-content { grid-template-columns: repeat(2, 1fr); }
-      .comparison-grid { grid-template-columns: 1fr; }
-      .comparison-card.featured { transform: scale(1); }
+      .features-grid, .pricing-grid, .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-wrapper { grid-template-columns: 1fr; gap: 2rem; }
+      .benefits-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+      .stats-wrapper { grid-template-columns: repeat(2, 1fr); }
+      .footer-wrapper { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 600px) {
       header { padding: 1rem; }
+      nav { display: none; }
+      .mobile-menu { display: block; }
       .hero { padding: 6rem 1rem 2rem; }
-      .hero h1 { font-size: 1.8rem; }
-      .hero p { font-size: 1.05rem; }
-      .hero-buttons { flex-direction: column; }
-      .btn { width: 100%; text-align: center; }
-      .hero-features { flex-direction: column; }
-      .section-header h2 { font-size: 2rem; }
-      .features-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.2rem; }
+      .features-grid, .pricing-grid, .stats-wrapper { grid-template-columns: 1fr; }
+      .section-intro h2 { font-size: 2rem; }
+      .cta-final { margin: 2rem 1rem; }
     }
   </style>
 </head>
@@ -731,164 +441,200 @@
 
   <!-- HEADER -->
   <header id="header">
-    <div class="header-content">
+    <div class="header-wrapper">
       <a href="#" class="logo">
         <div class="logo-icon">
-          <svg viewBox="0 0 40 40" fill="none" style="width:100%;height:100%;"><rect x="8" y="17" width="24" height="12" rx="5" fill="white" stroke="#fff" stroke-width="1"/><polyline points="13,25 18,20 23,26 31,17" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 40 40" fill="none" style="width:100%;height:100%;"><rect x="8" y="17" width="24" height="12" rx="5" fill="white"/><polyline points="13,25 18,20 23,26 31,17" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
         </div>
-        <span class="logo-text">TRADEERA</span>
+        TRADEERA
       </a>
       <nav>
-        <a href="#home">Home</a>
         <a href="#features">Features</a>
+        <a href="#how">How It Works</a>
         <a href="#pricing">Pricing</a>
         <a href="#testimonials">Reviews</a>
-        <a href="#contact">Contact</a>
       </nav>
       <div class="nav-buttons">
-        <a href="#login" class="btn btn-outline">Sign In</a>
-        <a href="#signup" class="btn btn-primary">Get Started</a>
+        <a href="#" class="btn btn-outline">Sign In</a>
+        <a href="#" class="btn btn-primary">Get Started</a>
       </div>
-      <button class="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-container">
+  <section class="hero">
+    <div class="hero-wrapper">
       <div class="hero-content">
         <div class="hero-badge">🚀 Next-Gen Trading Platform</div>
-        <h1>Trade with <span>Confidence</span></h1>
-        <p>Harness the power of AI-driven analytics and real-time market intelligence. Make smarter trades, manage risks better, and grow your wealth faster than ever before.</p>
+        <h1>Intelligent <span>Trading Intelligence</span> Platform</h1>
+        <p>Harness advanced AI and real-time market intelligence to make smarter trading decisions. Enterprise-grade tools for professional traders and institutions.</p>
         <div class="hero-buttons">
-          <a href="#signup" class="btn btn-primary">Start Trading Free</a>
-          <a href="#demo" class="btn btn-outline">Watch Demo</a>
-        </div>
-        <div class="hero-features">
-          <div class="hero-feature">No Credit Card</div>
-          <div class="hero-feature">Instant Access</div>
-          <div class="hero-feature">24/7 Support</div>
+          <a href="#" class="btn btn-primary">Start Free Trial</a>
+          <a href="#" class="btn btn-outline">Watch Demo</a>
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1611974519814-96ab84004e83?auto=format&fit=crop&w=600&q=80" alt="Trading Platform">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="Trading Dashboard">
       </div>
     </div>
   </section>
 
-  <!-- TRUST SECTION -->
-  <section class="trust">
-    <div class="trust-content">
-      <div class="trust-item">
-        <div class="trust-num">50K+</div>
-        <div class="trust-label">Active Traders Worldwide</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-num">$2.5B+</div>
-        <div class="trust-label">Trading Volume Daily</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-num">99.9%</div>
-        <div class="trust-label">Platform Uptime</div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-num">150+</div>
-        <div class="trust-label">Markets Available</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES SHOWCASE -->
-  <section class="features-showcase" id="features">
-    <div class="section-header">
+  <!-- FEATURES -->
+  <section class="features-block" id="features">
+    <div class="section-intro">
       <h2>Powerful Features</h2>
-      <p>Everything you need to succeed in trading. From beginners to professionals, we have the tools you need.</p>
+      <p>Everything enterprise traders need to succeed. Advanced analytics, real-time data, and AI-powered insights all in one platform.</p>
     </div>
-    <div class="features-grid">
-      <div class="feature-card">
-        <span class="feature-icon">📊</span>
-        <h3>Real-Time Analytics</h3>
-        <p>Advanced charting tools with live market data. Get instant insights with our machine learning algorithms.</p>
+    <div class="features-wrapper">
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <h3>Real-Time Analytics</h3>
+          <p>Advanced charting with live market data. Get instant insights with our proprietary algorithms.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🤖</span>
+          <h3>AI Predictions</h3>
+          <p>Predictive analytics powered by machine learning. Identify opportunities before the market catches on.</p>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🛡️</span>
+          <h3>Enterprise Security</h3>
+          <p>Bank-level encryption and compliance. Your portfolio is protected 24/7 with multi-factor authentication.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">🤖</span>
-        <h3>AI Predictions</h3>
-        <p>Predictive analytics powered by neural networks. Identify opportunities before the market catches on.</p>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits-section">
+    <div class="benefits-wrapper">
+      <div class="benefits-content">
+        <h2>Why Choose TRADEERA?</h2>
+        <p>We combine cutting-edge technology with deep market expertise. Used by 50,000+ professional traders worldwide.</p>
+        <div class="benefits-list">
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">99.9% uptime guarantee with SLA</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">Sub-millisecond trade execution</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">24/7 dedicated support</div>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-check">✓</div>
+            <div class="benefit-text">150+ markets and instruments</div>
+          </div>
+        </div>
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">🛡️</span>
-        <h3>Military-Grade Security</h3>
-        <p>Bank-level encryption and multi-factor authentication. Your assets are completely protected.</p>
+      <div class="benefits-image">
+        <img src="https://images.unsplash.com/photo-1611974519814-96ab84004e83?auto=format&fit=crop&w=600&q=80" alt="Platform Analytics">
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">⚡</span>
-        <h3>Lightning-Fast Execution</h3>
-        <p>Ultra-low latency trading. Execute trades in milliseconds with our optimized infrastructure.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="stats-wrapper">
+      <div class="stat-card">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Active Traders</div>
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">📱</span>
-        <h3>Mobile Trading</h3>
-        <p>Full trading platform on iOS and Android. Trade anywhere, anytime with our native apps.</p>
+      <div class="stat-card">
+        <div class="stat-number">$2.5B+</div>
+        <div class="stat-label">Daily Volume</div>
       </div>
-      <div class="feature-card">
-        <span class="feature-icon">🎯</span>
-        <h3>Smart Automation</h3>
-        <p>Set custom trading bots and rules. Automate your strategy and let AI work for you 24/7.</p>
+      <div class="stat-card">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Markets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">99.9%</div>
+        <div class="stat-label">Uptime</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="how-wrapper">
+      <div class="section-intro">
+        <h2>How It Works</h2>
+        <p>Get started in minutes. Simple, transparent process to begin trading smarter today.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Create Account</h3>
+          <p>Sign up in seconds. Instant verification and access to the platform.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Fund Account</h3>
+          <p>Add funds through multiple payment methods. Secure and instant deposit.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Start Trading</h3>
+          <p>Access all features and markets immediately. Full trading capabilities.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Grow Wealth</h3>
+          <p>Use AI insights to make smarter trades. Monitor performance in real-time.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section class="comparison" id="pricing">
-    <div class="comparison-container">
-      <div class="section-header">
-        <h2>Simple, Transparent Pricing</h2>
-        <p>Choose the plan that works for you. All plans include unlimited trades and market access.</p>
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-wrapper">
+      <div class="section-intro">
+        <h2>Simple Pricing</h2>
+        <p>Transparent, no hidden fees. Choose the plan that fits your trading needs.</p>
       </div>
-      <div class="comparison-grid">
-        <div class="comparison-card">
-          <div class="comparison-title">Starter</div>
-          <div class="comparison-price">Free</div>
-          <div class="comparison-period">Forever</div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="price-tier">Starter</div>
+          <div class="price">Free</div>
+          <div class="price-period">Forever</div>
           <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Get Started</a>
-          <ul class="comparison-features">
+          <ul class="price-features">
             <li>Real-time market data</li>
             <li>Basic charting</li>
-            <li>5 watchlists</li>
             <li>Email support</li>
-            <li>Mobile app access</li>
+            <li>Mobile app</li>
           </ul>
         </div>
-        <div class="comparison-card featured">
-          <div class="comparison-title">Pro</div>
-          <div class="comparison-price">$29</div>
-          <div class="comparison-period">per month</div>
-          <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Start Free Trial</a>
-          <ul class="comparison-features">
+        <div class="pricing-card">
+          <div class="price-tier">Professional</div>
+          <div class="price">$29</div>
+          <div class="price-period">per month</div>
+          <a href="#" class="btn btn-primary" style="width: 100%; text-align: center;">Start Trial</a>
+          <ul class="price-features">
             <li>Everything in Starter</li>
             <li>Advanced analytics</li>
-            <li>Unlimited watchlists</li>
             <li>AI predictions</li>
             <li>Priority support</li>
             <li>Custom indicators</li>
           </ul>
         </div>
-        <div class="comparison-card">
-          <div class="comparison-title">Enterprise</div>
-          <div class="comparison-price">Custom</div>
-          <div class="comparison-period">contact us</div>
+        <div class="pricing-card">
+          <div class="price-tier">Enterprise</div>
+          <div class="price">Custom</div>
+          <div class="price-period">contact sales</div>
           <a href="#" class="btn btn-outline" style="width: 100%; text-align: center;">Request Demo</a>
-          <ul class="comparison-features">
-            <li>Everything in Pro</li>
+          <ul class="price-features">
+            <li>Everything in Professional</li>
             <li>API access</li>
-            <li>Dedicated account manager</li>
-            <li>Custom integrations</li>
+            <li>Dedicated manager</li>
+            <li>Custom integration</li>
             <li>SLA guarantee</li>
-            <li>White-label option</li>
           </ul>
         </div>
       </div>
@@ -896,38 +642,36 @@
   </section>
 
   <!-- CTA -->
-  <section style="padding: 0 2rem; max-width: 1300px; margin: 0 auto;">
-    <div class="cta-section">
-      <div class="cta-content">
-        <h2>Ready to Start Trading Smarter?</h2>
-        <p>Join 50,000+ traders who are growing their wealth with TRADEERA. Get started free today.</p>
-        <a href="#signup" class="btn">Create Free Account</a>
-      </div>
+  <section style="padding: 0 3rem;">
+    <div class="cta-final">
+      <h2>Ready to Trade Smarter?</h2>
+      <p>Join 50,000+ traders growing their wealth with TRADEERA. Start free today.</p>
+      <a href="#" class="btn">Create Free Account</a>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
-    <div style="max-width: 1300px; margin: 0 auto;">
-      <div class="section-header">
-        <h2>Loved by Traders</h2>
-        <p>See what our community has to say about TRADEERA</p>
+    <div class="testimonials-wrapper">
+      <div class="section-intro">
+        <h2>Trusted by Traders</h2>
+        <p>See what professionals have to say about TRADEERA</p>
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"TRADEERA's AI predictions have transformed my trading strategy. I've increased my profits by 40% in just 3 months."</div>
+          <div class="testimonial-text">"Increased my trading profits by 40% in 3 months using TRADEERA's AI predictions. Best platform I've used."</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar"></div>
             <div class="testimonial-info">
               <div class="testimonial-name">Sarah Johnson</div>
-              <div class="testimonial-role">Professional Trader</div>
+              <div class="testimonial-role">Pro Trader</div>
             </div>
           </div>
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"As a beginner, I was intimidated by trading. TRADEERA made it so easy and intuitive. Their support team is amazing!"</div>
+          <div class="testimonial-text">"As a beginner, TRADEERA made it incredibly easy to start. The interface is intuitive and support is amazing."</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar"></div>
             <div class="testimonial-info">
@@ -938,12 +682,12 @@
         </div>
         <div class="testimonial-card">
           <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-          <div class="testimonial-text">"The security features and platform stability are unmatched. I trust TRADEERA completely with my portfolio."</div>
+          <div class="testimonial-text">"Enterprise-grade security and reliability. We've moved our entire operation here. Couldn't be happier."</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar"></div>
             <div class="testimonial-info">
               <div class="testimonial-name">Emma Davis</div>
-              <div class="testimonial-role">Investor</div>
+              <div class="testimonial-role">Fund Manager</div>
             </div>
           </div>
         </div>
@@ -953,7 +697,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-content">
+    <div class="footer-wrapper">
       <div class="footer-col">
         <h3>Product</h3>
         <a href="#">Platform</a>
@@ -970,36 +714,55 @@
       </div>
       <div class="footer-col">
         <h3>Legal</h3>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Risk Disclaimer</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Disclaimer</a>
       </div>
       <div class="footer-col">
-        <h3>Connect</h3>
+        <h3>Social</h3>
         <a href="#">Twitter</a>
         <a href="#">LinkedIn</a>
-        <a href="#">Facebook</a>
+        <a href="#">GitHub</a>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 TRADEERA. All rights reserved. | Trusted by 50K+ traders worldwide.
+      &copy; 2025 TRADEERA. Enterprise Trading Intelligence Platform. All rights reserved.
     </div>
   </footer>
 
   <script>
     window.addEventListener('scroll', () => {
       const header = document.getElementById('header');
-      header.classList.toggle('scrolled', window.scrollY > 50);
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
 
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const target = document.querySelector(a.getAttribute('href'));
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const target = document.querySelector(anchor.getAttribute('href'));
         if (target) {
           e.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
+    });
+
+    // Intersection Observer for animations on scroll
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animation = entry.target.style.animation;
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.feature-item, .step-card, .pricing-card, .stat-card').forEach(el => {
+      observer.observe(el);
     });
   </script>
 
