@@ -1,132 +1,470 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>TRADEERA - Predict. Trade. Grow.</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
+  <title>TRADEERA - AI-Powered Trading Intelligence Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    html,body {margin:0; padding:0; font-family:'Nunito',Arial,sans-serif; background:#f7faf8;}
-    body {color:#17493b;}
-    header {
-      width:100%;height:76px;background:#fff;
-      display:flex;align-items:center;justify-content:space-between;padding:0 4vw 0 2.3vw;box-shadow:0 1px 11px #bdfbe854;position:fixed;top:0;left:0;z-index:999;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { 
+      font-family: 'Nunito', sans-serif; 
+      background: #f8fdf9; 
+      color: #1a4d3b; 
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    .logo-area {display:flex;align-items:center;}
-    .logo-svg {width:45px;height:45px;background:#ecfff3;border-radius:12px;box-shadow:0 0 4px #cdfae8;margin-right:12px;}
-    .logo-text {font-size:2em;font-weight:800;color:#16af82;letter-spacing:.03em;}
-    nav {display:flex;gap:32px;align-items:center;}
-    nav a {text-decoration:none;font-weight:700;color:#178e65;font-size:1.1em;transition:color .15s;}
-    nav a:hover {color:#33cf96;}
-    .nav-btns {margin-left:30px;}
-    .nav-btn {background:#fff; border:1.7px solid #49d699; color:#17a66a; font-weight:700; border-radius:9px; padding:9px 23px; margin-left:11px; cursor:pointer; font-size:1em; transition:background .1s;}
-    .nav-btn.signup {background:linear-gradient(90deg,#bffbe2,#4ff7b5); color:#0b7550;}
-    .nav-btn:hover {background:#e6fcf2; color:#1f4d3f;}
-    @media (max-width:900px){
-      nav{display:none;}
-      .nav-mobile{display:inline-block;}
+    
+    /* HEADER */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.98); backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(17,168,116,0.08);
+      padding: 0 5vw; height: 80px; display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
     }
+    .header.scrolled { box-shadow: 0 2px 30px rgba(17,168,116,0.15); }
+    .logo-container { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 48px; height: 48px; background: linear-gradient(135deg, #e8fff1 0%, #bef8d4 100%);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(20,160,116,0.2);
+    }
+    .logo-icon svg { width: 32px; height: 32px; }
+    .logo-text { 
+      font-size: 1.8em; font-weight: 900; 
+      background: linear-gradient(135deg, #14a074 0%, #16af82 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: 0.5px;
+    }
+    nav { display: flex; gap: 40px; align-items: center; }
+    nav a { 
+      text-decoration: none; color: #178e65; font-weight: 700; font-size: 1.05em;
+      transition: all 0.3s ease; position: relative;
+    }
+    nav a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+      background: #16af82; transition: width 0.3s ease;
+    }
+    nav a:hover { color: #16af82; }
+    nav a:hover::after { width: 100%; }
+    .nav-buttons { display: flex; gap: 15px; margin-left: 20px; }
+    .btn {
+      padding: 12px 28px; border-radius: 10px; font-weight: 700; font-size: 1em;
+      cursor: pointer; transition: all 0.3s ease; border: none; text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline {
+      background: transparent; border: 2px solid #49d699; color: #17a66a;
+    }
+    .btn-outline:hover {
+      background: #e6fcf2; transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(73,214,153,0.3);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #bffbe2 0%, #4ff7b5 100%);
+      color: #0b7550; box-shadow: 0 4px 15px rgba(79,247,181,0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79,247,181,0.4);
+    }
+    .mobile-menu-btn {
+      display: none; background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px;
+    }
+    .mobile-menu-btn span {
+      width: 28px; height: 3px; background: #14a074; border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* HERO SECTION */
     .hero {
-      display:flex;align-items:center;justify-content:space-between;width:100vw; min-height:91vh; padding:122px 0 0 0;background:linear-gradient(132deg,#edfcf4 20%,#f7faff 71%);
-      gap:16px;
+      min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
+      padding: 120px 5vw 60px; gap: 60px;
+      background: linear-gradient(135deg, #edfcf4 0%, #f7faff 100%);
+      position: relative; overflow: hidden;
     }
-    .hero-content {flex:1.35; min-width:290px; display:flex; flex-direction:column; align-items:flex-start;padding-left:11vw;}
-    .hero-head {font-size:2.45rem; font-weight:900;color:#10a979;max-width:560px;}
-    .hero-sub {font-size:1.38rem; margin:22px 0 25px 0;color:#147c54; max-width:510px;}
-    .hero-btn {background:linear-gradient(111deg,#bffbe2 80%,#4ff7b5); color:#136243; border:none; font-weight:800; border-radius:15px; font-size:1.09em; padding:19px 38px;margin-top:9px; box-shadow:0 2px 23px #baffee33;cursor:pointer;}
-    .hero-img-area {flex:1;display:flex;justify-content:center;align-items:center;min-width:280px;}
-    .hero-img-area img {border-radius:17px;box-shadow:0 5px 46px #94f6cd44;max-width:410px;width:88vw;}
-    .features-section {background:#fff;margin-top:-46px;box-shadow:0 2px 38px #10be7c09; padding:58px 0;}
-    .features-wrap {display:flex;justify-content:center;gap:55px;flex-wrap:wrap;max-width:1120px;margin:0 auto;}
-    .feature-block {background:#edfff7;border-radius:16px;box-shadow:0 3px 44px #b8fde323; flex:1;min-width:210px;max-width:350px;padding:33px 29px 24px 27px;text-align:left;margin:14px;}
-    .feature-icon {font-size:2.7em;margin-bottom:14px;color:#19db88;}
-    .feature-title {font-weight:800;color:#107657;font-size:1.16em;margin-bottom:8px;}
-    .feature-desc {color:#21765a;font-size:1em;line-height:1.7em;}
-    .about-section {background:#f7faf8;padding:75px 0 85px 0;}
-    .about-wrap {max-width:1170px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:48px;}
-    .about-img {flex:1;min-width:260px;}
-    .about-img img {width:100%;max-width:420px;border-radius:19px;box-shadow:0 0 33px #b6fad5;}
-    .about-content {flex:2;min-width:290px;}
-    .about-title {font-size:2em;font-weight:800;color:#11986a;}
-    .about-desc {font-size:1.16em;color:#197c5d;margin:18px 0 0 0;max-width:560px;}
-    .footer {background:#e6fff5;padding:30px 8vw 11px 8vw;color:#16915d;font-size:1.15em;font-weight:600;margin-top:66px;}
+    .hero::before {
+      content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(79,247,181,0.15) 0%, transparent 70%);
+      animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-50px, 50px) rotate(180deg); }
+    }
+    .hero-content {
+      flex: 1; max-width: 600px; z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-badge {
+      display: inline-block; padding: 8px 20px; background: rgba(79,247,181,0.2);
+      border-radius: 50px; color: #0b7550; font-weight: 700; font-size: 0.9em;
+      margin-bottom: 25px; border: 1px solid rgba(79,247,181,0.4);
+    }
+    .hero h1 {
+      font-size: 3.5em; font-weight: 900; line-height: 1.2; margin-bottom: 25px;
+      background: linear-gradient(135deg, #10a979 0%, #16af82 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.3em; color: #147c54; margin-bottom: 40px; line-height: 1.8;
+    }
+    .hero-buttons { display: flex; gap: 20px; flex-wrap: wrap; }
+    .hero-image {
+      flex: 1; display: flex; justify-content: center; align-items: center;
+      animation: fadeInRight 1s ease-out 0.3s both;
+    }
+    @keyframes fadeInRight {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .hero-image img {
+      max-width: 100%; height: auto; border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(20,160,116,0.2);
+      transition: transform 0.3s ease;
+    }
+    .hero-image img:hover { transform: scale(1.02); }
+    
+    /* FEATURES SECTION */
+    .features {
+      padding: 100px 5vw; background: #fff;
+      position: relative;
+    }
+    .section-header {
+      text-align: center; max-width: 700px; margin: 0 auto 70px;
+    }
+    .section-badge {
+      display: inline-block; padding: 8px 20px; background: rgba(79,247,181,0.15);
+      border-radius: 50px; color: #0b7550; font-weight: 700; font-size: 0.95em;
+      margin-bottom: 20px; border: 1px solid rgba(79,247,181,0.3);
+    }
+    .section-header h2 {
+      font-size: 2.8em; font-weight: 900; color: #11986a; margin-bottom: 20px;
+    }
+    .section-header p {
+      font-size: 1.2em; color: #197c5d; line-height: 1.8;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px; max-width: 1200px; margin: 0 auto;
+    }
+    .feature-card {
+      background: linear-gradient(135deg, #edfff7 0%, #f9fffe 100%);
+      padding: 40px 30px; border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(185,253,227,0.3);
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .feature-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #bffbe2, #4ff7b5);
+      transform: scaleX(0); transition: transform 0.3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(185,253,227,0.4);
+    }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-icon {
+      font-size: 3em; margin-bottom: 20px; display: block;
+    }
+    .feature-card h3 {
+      font-size: 1.5em; font-weight: 800; color: #107657; margin-bottom: 15px;
+    }
+    .feature-card p {
+      color: #21765a; font-size: 1.05em; line-height: 1.7;
+    }
+    
+    /* ABOUT SECTION */
+    .about {
+      padding: 100px 5vw; background: linear-gradient(135deg, #f7faf8 0%, #edfcf4 100%);
+    }
+    .about-container {
+      max-width: 1200px; margin: 0 auto; display: flex; align-items: center;
+      gap: 80px; flex-wrap: wrap;
+    }
+    .about-image {
+      flex: 1; min-width: 300px;
+    }
+    .about-image img {
+      width: 100%; border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(20,160,116,0.25);
+    }
+    .about-content {
+      flex: 1.2; min-width: 300px;
+    }
+    .about-content h2 {
+      font-size: 2.5em; font-weight: 900; color: #11986a; margin-bottom: 25px;
+    }
+    .about-content p {
+      font-size: 1.15em; color: #197c5d; margin-bottom: 20px; line-height: 1.8;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px;
+    }
+    .stat-item {
+      text-align: center; padding: 20px;
+      background: rgba(255,255,255,0.8); border-radius: 15px;
+    }
+    .stat-number {
+      font-size: 2.5em; font-weight: 900;
+      background: linear-gradient(135deg, #14a074 0%, #16af82 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      color: #197c5d; font-weight: 600; margin-top: 5px;
+    }
+    
+    /* CTA SECTION */
+    .cta {
+      padding: 100px 5vw; background: linear-gradient(135deg, #14a074 0%, #16af82 100%);
+      text-align: center; color: #fff; position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: ''; position: absolute; top: -50%; left: -20%; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 15s ease-in-out infinite;
+    }
+    .cta-content {
+      max-width: 800px; margin: 0 auto; position: relative; z-index: 2;
+    }
+    .cta h2 {
+      font-size: 2.8em; font-weight: 900; margin-bottom: 25px;
+    }
+    .cta p {
+      font-size: 1.3em; margin-bottom: 40px; opacity: 0.95;
+    }
+    .cta .btn {
+      background: #fff; color: #14a074; font-size: 1.1em; padding: 15px 40px;
+    }
+    .cta .btn:hover {
+      background: #f0fff8; transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    
+    /* FOOTER */
+    .footer {
+      background: #0d3d2f; color: #b0f2d7; padding: 60px 5vw 30px;
+    }
+    .footer-content {
+      max-width: 1200px; margin: 0 auto; display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px;
+    }
+    .footer-section h3 {
+      color: #4ff7b5; font-size: 1.3em; margin-bottom: 20px; font-weight: 800;
+    }
+    .footer-section p, .footer-section a {
+      color: #b0f2d7; text-decoration: none; display: block; margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+    .footer-section a:hover { color: #4ff7b5; }
+    .footer-bottom {
+      text-align: center; margin-top: 50px; padding-top: 30px;
+      border-top: 1px solid rgba(176,242,215,0.2);
+      color: #7dd3b3;
+    }
+    
     /* RESPONSIVE */
-    @media(max-width:1100px){
-      .features-wrap{flex-direction:column;align-items:center;}
-      .about-wrap{flex-direction:column;}
-      .about-section{padding-top:38px;}
-    }
-    @media(max-width:700px){
-      .hero{flex-direction:column-reverse;padding-top:95px;}
-      .hero-content{padding-left:7vw;}
-      .about-img img{max-width:94vw;}
+    @media (max-width: 900px) {
+      nav { display: none; }
+      .mobile-menu-btn { display: flex; }
+      .hero { flex-direction: column-reverse; padding-top: 100px; text-align: center; }
+      .hero-content { max-width: 100%; }
+      .hero h1 { font-size: 2.5em; }
+      .hero-buttons { justify-content: center; }
+      .about-container { flex-direction: column; gap: 40px; }
+      .stats-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-<header>
-  <div class="logo-area">
-    <span class="logo-svg">
-      <svg viewBox="0 0 42 42" fill="none" style="width:100%;height:100%;">
-        <rect x="7" y="16" width="28" height="15" rx="6" fill="#bef8d4" stroke="#14a074" stroke-width="2"/>
-        <polyline points="13,26 20,20 26,27 34,18" fill="none" stroke="#14a074" stroke-width="2.3" stroke-linecap="round"/>
-        <circle cx="13" cy="26" r="2" fill="#11a874"/>
-        <circle cx="20" cy="20" r="2" fill="#14a074"/>
-      </svg>
-    </span>
-    <span class="logo-text">TRADEERA</span>
-  </div>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Product</a>
-    <a href="#">Pricing</a>
-    <a href="#">Contact</a>
-    <span class="nav-btns">
-      <button class="nav-btn">Login</button>
-      <button class="nav-btn signup">Sign Up Free</button>
-    </span>
-  </nav>
-</header>
-<main>
-  <section class="hero">
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="logo-container">
+      <div class="logo-icon">
+        <svg viewBox="0 0 42 42" fill="none">
+          <rect x="7" y="16" width="28" height="15" rx="6" fill="#bef8d4" stroke="#14a074" stroke-width="2"/>
+          <polyline points="13,26 20,20 26,27 34,18" fill="none" stroke="#14a074" stroke-width="2.3" stroke-linecap="round"/>
+          <circle cx="13" cy="26" r="2" fill="#11a874"/>
+          <circle cx="20" cy="20" r="2" fill="#14a074"/>
+        </svg>
+      </div>
+      <div class="logo-text">TRADEERA</div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <div class="nav-buttons">
+        <a href="#login" class="btn btn-outline">Login</a>
+        <a href="#signup" class="btn btn-primary">Sign Up Free</a>
+      </div>
+    </nav>
+    <button class="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
     <div class="hero-content">
-      <div class="hero-head">Predict, Trade, and Grow with Confidence</div>
-      <div class="hero-sub">Advanced analytics and AI-driven insights for smarter trading, real-time portfolio growth, and total control of your trading journey.</div>
-      <button class="hero-btn">Get Started</button>
+      <div class="hero-badge">🚀 AI-Powered Trading Platform</div>
+      <h1>Predict, Trade, and Grow with Confidence</h1>
+      <p>Advanced analytics and AI-driven insights for smarter trading decisions. Real-time portfolio management and total control of your financial journey.</p>
+      <div class="hero-buttons">
+        <a href="#signup" class="btn btn-primary" style="font-size: 1.1em; padding: 15px 35px;">Get Started Free</a>
+        <a href="#features" class="btn btn-outline">Learn More</a>
+      </div>
     </div>
-    <div class="hero-img-area">
-      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Trading analytics overview">
-    </div>
-  </section>
-  <section class="features-section">
-    <div class="features-wrap">
-      <div class="feature-block"><span class="feature-icon">📊</span>
-        <div class="feature-title">Live Trading Analytics</div>
-        <div class="feature-desc">Monitor markets in real time and receive instant alerts. Stay ahead with actionable insights and data-driven decision making.</div>
-      </div>
-      <div class="feature-block"><span class="feature-icon">🛡️</span>
-        <div class="feature-title">Secure & Trusted</div>
-        <div class="feature-desc">Your data and capital are protected by enterprise-level security and best-in-class encryption.</div>
-      </div>
-      <div class="feature-block"><span class="feature-icon">🤖</span>
-        <div class="feature-title">AI-Powered Predictions</div>
-        <div class="feature-desc">Gain the edge with accurate, machine learning-based predictions, reducing your risk and maximizing your profit.</div>
-      </div>
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Trading Dashboard">
     </div>
   </section>
-  <section class="about-section">
-    <div class="about-wrap">
-      <div class="about-img"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" alt="Team at work"></div>
+
+  <!-- FEATURES SECTION -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <div class="section-badge">✨ Why Choose TRADEERA</div>
+      <h2>Powerful Features for Smart Trading</h2>
+      <p>Everything you need to make informed decisions and maximize your trading potential</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Real-Time Analytics</h3>
+        <p>Monitor markets in real-time with live data feeds, advanced charting tools, and instant alerts to stay ahead of market movements.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3>AI-Powered Insights</h3>
+        <p>Leverage machine learning algorithms to identify trading opportunities, predict market trends, and optimize your strategy.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <h3>Bank-Level Security</h3>
+        <p>Your data and assets are protected with enterprise-grade encryption, two-factor authentication, and secure storage.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">💼</span>
+        <h3>Portfolio Management</h3>
+        <p>Track all your investments in one place with comprehensive portfolio analytics and performance tracking.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">📱</span>
+        <h3>Mobile Trading</h3>
+        <p>Trade on the go with our fully responsive platform. Access all features from any device, anywhere.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon">🎯</span>
+        <h3>Smart Automation</h3>
+        <p>Set up automated trading strategies with custom rules and alerts to execute trades based on your criteria.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="about-container">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Platform Overview">
+      </div>
       <div class="about-content">
-        <div class="about-title">What is TRADEERA?</div>
-        <div class="about-desc">
-          TRADEERA is your smart, secure, and easy-to-use platform for trading insights and portfolio management. By combining advanced AI with real market data, we empower users to make smarter trades with full confidence. Start growing today with real-time analytics, personalized alerts, and 24/7 support.
+        <div class="section-badge">💡 About TRADEERA</div>
+        <h2>Your Intelligent Trading Partner</h2>
+        <p>TRADEERA combines cutting-edge artificial intelligence with real-time market data to empower traders of all levels. Our platform analyzes millions of data points to deliver actionable insights, helping you make smarter trading decisions.</p>
+        <p>Whether you're a beginner or an experienced trader, TRADEERA provides the tools, analytics, and support you need to succeed in today's fast-paced markets.</p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">50K+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">$2.5B+</div>
+            <div class="stat-label">Trading Volume</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-</main>
-<footer class="footer">
-  &copy; 2025 TradeEra. All rights reserved. | <a href="#" style="color:#149b70;text-decoration:none;">Privacy Policy</a> | <a href="#" style="color:#149b70;text-decoration:none;">Terms</a>
-</footer>
+
+  <!-- CTA SECTION -->
+  <section class="cta">
+    <div class="cta-content">
+      <h2>Ready to Start Trading Smarter?</h2>
+      <p>Join thousands of traders who trust TRADEERA for their trading journey. Get started today with our free account.</p>
+      <a href="#signup" class="btn">Create Free Account</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>TRADEERA</h3>
+        <p>AI-powered trading platform for smart investors. Make data-driven decisions with confidence.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Product</h3>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#api">API</a>
+        <a href="#security">Security</a>
+      </div>
+      <div class="footer-section">
+        <h3>Company</h3>
+        <a href="#about">About Us</a>
+        <a href="#careers">Careers</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#disclaimer">Risk Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 TRADEERA. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
